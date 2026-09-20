@@ -16,7 +16,7 @@ export class StockController {
             const stock = await stockService.getStockData(symbol);
             return stock;
           } catch (error) {
-            console.error(`Error fetching ${symbol}:`, error);
+            //console.error(`Error fetching ${symbol}:`, error);
             return null;
           }
         })

@@ -25,10 +25,9 @@ export class StockService {
         companyName: this.extractCompanyName(quote, summary),
         currency: quote.currency,
       };
-
       return stock;
     } catch (error) {
-      console.error(`Error fetching stock data for ${symbol}:`, error);
+      //console.error(`Error fetching stock data for ${symbol}:`, error);
       throw new Error(
         `Failed to fetch stock data for ${symbol}: ${(error as Error).message}`
       );
@@ -70,7 +69,7 @@ export class StockService {
 
       return history;
     } catch (error) {
-      console.error(`Error fetching historical data for ${symbol}:`, error);
+      //console.error(`Error fetching historical data for ${symbol}:`, error);
       throw new Error(
         `Failed to fetch historical data for ${symbol}: ${(error as Error).message}`
       );
@@ -100,7 +99,7 @@ export class StockService {
 
       return marketData;
     } catch (error) {
-      console.error(`Error fetching market data for ${symbol}:`, error);
+      //console.error(`Error fetching market data for ${symbol}:`, error);
       throw new Error(
         `Failed to fetch market data for ${symbol}: ${(error as Error).message}`
       );

@@ -12,6 +12,10 @@ interface Stock {
   changePercent: number;
   volume: number;
   marketCap?: number;
+  peRatio?: number;
+  high52Week?: number;
+  low52Week?: number;
+  currency?: string
 }
 
 interface DashboardProps {
@@ -21,7 +25,7 @@ interface DashboardProps {
 export default function Dashboard({ params }: DashboardProps) {
   const [stocks, setStocks] = useState<Stock[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedStock, setSelectedStock] = useState<string | null>(null);
+  const [selectedStock, setSelectedStock] = useState<Stock | null>(null);
 
   useEffect(() => {
     const fetchStocks = async () => {
@@ -53,7 +57,8 @@ export default function Dashboard({ params }: DashboardProps) {
   }, [params]);
 
   const handleStockClick = (symbol: string) => {
-    setSelectedStock(symbol);
+    const selected = stocks.find((stock) => stock.symbol == symbol)
+    setSelectedStock(selected ?? null);
   };
 
   const handleBackToDashboard = () => {
@@ -87,7 +92,16 @@ export default function Dashboard({ params }: DashboardProps) {
           <h2 className="text-xl font-semibold mb-4">Stock Details</h2>
           <div className="flex gap-4">
             <div className="flex-1">
-              <h3 className="text-lg font-semibold">{selectedStock}</h3>
+              <h3 className="text-lg font-semibold">{selectedStock.symbol} - {selectedStock.name}</h3>
+              <p style={{color: selectedStock.change > 0 ? "green" : "red"}}>{selectedStock.change} ({selectedStock.changePercent.toFixed(2)}%)</p>
+              <p>Vol: {(selectedStock.volume / 1000000).toFixed(1)}M</p>
+              <p>High: {selectedStock.high52Week}</p>
+              <p>Low: {selectedStock.low52Week}</p>
+              <p>Pe Ratio: {selectedStock.peRatio}</p>
+              <p>Price: {selectedStock.price} {selectedStock.currency == "USD" ? "$" : "€"}</p>
+              {selectedStock.marketCap && 
+                <p>Market Cap: ${(selectedStock.marketCap / 1000000).toFixed(2)}B</p>
+              }
               <p className="text-muted-foreground">Click on a stock card to view details</p>
             </div>
           </div>

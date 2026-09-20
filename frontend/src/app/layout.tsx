@@ -35,7 +35,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <footer className="border-t py-4 text-center text-sm">
-          © 2024 Stock Market Viewer. All rights reserved.
+          © 2026 Stock Market Viewer. All rights reserved.
         </footer>
       </body>
     </html>
