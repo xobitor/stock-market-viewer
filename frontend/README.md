@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Stock Market Viewer - Frontend
+
+A modern, responsive stock market visualizer built with Next.js 16, React 19, and TypeScript.
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **UI Library**: React 19
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4
+- **Charts**: Recharts
+
+## Project Structure
+
+```
+frontend/
+├── app/
+│   ├── api/
+│   │   └── stocks/
+│   │       ├── [symbol]/
+│   │       │   ├── history/
+│   │       │   │   └── route.ts
+│   │       │   └── realtime/
+│   │       │       └── route.ts
+│   │       ├── [symbol]/
+│   │       │   └── route.ts
+│   │       └── route.ts
+│   ├── layout.tsx
+│   ├── globals.css
+│   ├── page.tsx
+│   └── stock/
+│       └── [symbol]/
+│           └── page.tsx
+├── src/
+│   ├── components/
+│   │   ├── StockCard.tsx
+│   │   ├── StockChart.tsx
+│   │   ├── StockTable.tsx
+│   │   └── MarketIndicator.tsx
+│   └── types/
+│       └── stock.types.ts
+├── next.config.ts
+├── package.json
+└── tsconfig.json
+```
+
+## Features
+
+- **Dashboard**: Overview of popular stocks with real-time data
+- **Stock Details**: Individual stock pages with interactive charts
+- **Price History**: Interactive charts showing price movements
+- **Market Data**: Comprehensive market statistics
+- **Responsive Design**: Works seamlessly on desktop and mobile
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+ 
+- npm or yarn
+
+### Installation
+
+```bash
+cd frontend
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Opens at http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Build
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Start Production Server
 
-## Learn More
+```bash
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+## API Endpoints
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The frontend connects to the backend API at `http://localhost:3001`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `GET /api/stocks` - Get all popular stocks
+- `GET /api/stocks/:symbol` - Get specific stock data
+- `GET /api/stocks/:symbol/history?period=X` - Get historical data
+- `GET /api/stocks/:symbol/realtime` - Get real-time price
 
-## Deploy on Vercel
+## Components
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### StockCard
+Displays individual stock information including symbol, name, price, change, and volume.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### StockChart
+Interactive price history chart using Recharts with support for multiple time periods.
+
+### StockTable
+Grid layout displaying multiple stock cards for easy browsing.
+
+### MarketIndicator
+Shows market status and detailed statistics for a stock.
+
+## Styling
+
+The frontend uses Tailwind CSS 4 with custom CSS variables for theming. Supports dark mode automatically.
+
+## Development Guidelines
+
+1. Use TypeScript for type safety
+2. Follow Next.js App Router best practices
+3. Use the `@/` alias for imports
+4. Keep components small and focused
+5. Use proper accessibility attributes
+
+## License
+
+MIT

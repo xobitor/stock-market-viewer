@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Response } from 'express';
 import cors from 'cors';
 import { router } from './routes';
 
@@ -14,12 +14,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', router);
 
 // Health check endpoint
-app.get('/health', (req: Request, res: Response) => {
+app.get('/health', (_req, res: Response) => {
   res.json({ status: 'OK', timestamp: new Date().toISOString() });
 });
 
 // Error handling middleware
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: any, _req: any, res: Response, _next: any) => {
   console.error('Unhandled error:', err);
   res.status(500).json({
     message: 'Internal server error',
